@@ -3,6 +3,7 @@
 		{
 			private $sidebar = 'template/sidebar_keuangan';
 
+
 			public function __construct()
 				{
 					parent::__construct();
