@@ -12,6 +12,8 @@
 					$this->load->model('M_absensi');
 					$this->load->model('M_tunjangan');
 					$this->load->model('M_divisi');
+					$this->load->model('M_jurnal');
+					$this->load->model('M_akun');
 
 					if(empty($this->session->userdata('username')) || $this->session->userdata('jabatan') != 'STAFF AKUNTING')
 						{
@@ -1114,6 +1116,13 @@
 					$tgl_awal			= @$CI->input->post('tgl_awal');
 					$tgl_akhir			= @$CI->input->post('tgl_akhir');
 
+					# kode jurnal untuk input jurnal otomatis
+					$kode_jurnal	= 'JP'.date('YmdHis');
+
+					# data jurnal
+					$debet =0;
+					$kredit = 0;
+
 					
 					if(!empty($tgl_awal) && $tgl_awal != null && !empty($tgl_akhir) && $tgl_akhir != null)
 						{
@@ -1341,6 +1350,9 @@
 																			$data_gaji[$abs->id_karyawan]['transport']		= $jumlah_transport;
 																			$data_gaji[$abs->id_karyawan]['uang_makan']		= $jumlah_uang_makan;
 																			$data_gaji[$abs->id_karyawan]['total_tunjangan'] = $jumlah_tunjangan;
+
+																			$debet += ($gapok_karyawan + $upah_lembur + $jumlah_uang_makan + $jumlah_tunjangan + $jumlah_transport) - $potongan;
+																			$kredit += ($gapok_karyawan + $upah_lembur + $jumlah_uang_makan + $jumlah_tunjangan + $jumlah_transport) - $potongan;
 																		}
 
 																}
@@ -1481,6 +1493,9 @@
 																					$data_gaji[$abs->id_karyawan]['uang_makan']			= $jumlah_uang_makan;
 																					$data_gaji[$abs->id_karyawan]['total_tunjangan']	= $tunjangan;
 																					$data_gaji[$abs->id_karyawan]['total_tunjangan'] = $jumlah_tunjangan;
+
+																					$debet += ($gapok_karyawan + $upah_lembur + $jumlah_uang_makan + $jumlah_tunjangan + $jumlah_transport) - $potongan;
+																					$kredit += ($gapok_karyawan + $upah_lembur + $jumlah_uang_makan + $jumlah_tunjangan + $jumlah_transport) - $potongan;
 																				}
 
 																			
@@ -1560,6 +1575,10 @@
 																	$data_gaji[$abs->id_karyawan]['uang_makan']		= $jumlah_uang_makan;
 																	$data_gaji[$abs->id_karyawan]['total_tunjangan'] = $jumlah_tunjangan;
 
+																	$debet += ($gapok_karyawan + $upah_lembur + $jumlah_uang_makan + $jumlah_tunjangan + $jumlah_transport) - $potongan;
+
+																	$kredit += ($gapok_karyawan + $upah_lembur + $jumlah_uang_makan + $jumlah_tunjangan + $jumlah_transport) - $potongan;
+
 																}
 														}
 												}
@@ -1574,13 +1593,50 @@
 										}
 									else
 										{
+											$akun = $CI->M_akun->tampil_akun();
+
+											foreach($akun as $a)
+												{
+													if($a->nama_akun == 'kas')
+														{
+															$id_akun_kas = $a->id_akun;
+														}
+													else if($a->nama_akun == 'hutang gaji')
+														{
+															$id_akun_hutang_gaji = $a->id_akun;
+														}
+													echo '<option value="'.$a->id_akun.'">'.$a->nama_akun.'</option>';
+												}
+
+											$data_jurnal_debet = array(
+												'kode_jurnal'	=> $kode_jurnal,
+												'debet'			=> $debet,
+												'kode_akun'		=> $id_akun_kas,
+												'kredit'		=> 0,
+												'tgl'			=> date('Y-m-d'),
+												'created_at'	=> date('Y-m-d H:i:s'),
+											);
+
+											$data_jurnal_kredit = array(
+												'kode_jurnal'	=> $kode_jurnal,
+												'debet'			=> 0,
+												'kode_akun'		=> $id_akun_hutang_gaji,
+												'kredit'		=> $kredit,
+												'tgl'			=> date('Y-m-d'),
+												'created_at'	=> date('Y-m-d H:i:s'),
+											);
+
+											
 											$CI->db->trans_start();
 
 											foreach($data_gaji as $dg =>$v)
 												{
 													$CI->M_penggajian->tambah_penggajian($v);
+													
 													// $CI->M_penggajian->testing($v);
 												}
+											$CI->M_jurnal->tambah_jurnal($data_jurnal_debet);
+											$CI->M_jurnal->tambah_jurnal($data_jurnal_kredit);
 											
 											$CI->db->trans_complete();
 
