@@ -1391,20 +1391,24 @@
 																			
 
 																			$data_jurnal['debet'.$abs->id_karyawan] = array(
-																					'kode_jurnal'	=> $kode_jurnal,
+																					'kode_jurnal'	=> $kd_jurnal,
+																					'kode_penggajian'	=> $kd_penggajian,
 																					'debet'			=> $debet,
 																					'kode_akun'		=> $id_akun_kas,
 																					'kredit'		=> 0,
 																					'tgl'			=> date('Y-m-d'),
 																					'created_at'	=> date('Y-m-d H:i:s'),
+																					'keterangan'	=> 'CASH',
 																				);
 																			$data_jurnal['kredit'.$abs->id_karyawan] = array(
-																					'kode_jurnal'	=> $kode_jurnal,
+																					'kode_jurnal'	=> $kd_jurnal,
+																					'kode_penggajian'	=> $kd_penggajian,
 																					'debet'			=> 0,
 																					'kode_akun'		=> $id_akun_hutang_gaji,
 																					'kredit'		=> $kredit,
 																					'tgl'			=> date('Y-m-d'),
 																					'created_at'	=> date('Y-m-d H:i:s'),
+																					'keterangan'	=> 'CASH',
 																				);
 																		}
 
@@ -1556,20 +1560,24 @@
 																					
 
 																					$data_jurnal['debet'.$abs->id_karyawan] = array(
-																							'kode_jurnal'	=> $kode_jurnal,
+																							'kode_jurnal'	=> $kd_jurnal,
+																							'kode_penggajian'	=> $kd_penggajian,
 																							'debet'			=> $debet,
 																							'kode_akun'		=> $id_akun_kas,
 																							'kredit'		=> 0,
 																							'tgl'			=> date('Y-m-d'),
 																							'created_at'	=> date('Y-m-d H:i:s'),
+																							'keterangan'	=> 'TRANSFER',
 																						);
 																					$data_jurnal['kredit'.$abs->id_karyawan] = array(
-																							'kode_jurnal'	=> $kode_jurnal,
+																							'kode_jurnal'	=> $kd_jurnal,
+																							'kode_penggajian'	=> $kd_penggajian,
 																							'debet'			=> 0,
 																							'kode_akun'		=> $id_akun_hutang_gaji,
 																							'kredit'		=> $kredit,
 																							'tgl'			=> date('Y-m-d'),
 																							'created_at'	=> date('Y-m-d H:i:s'),
+																							'keterangan'	=> 'TRANSFER',
 																						);
 																				}
 
@@ -1659,20 +1667,24 @@
 																			
 
 																	$data_jurnal['debet'.$abs->id_karyawan] = array(
-																			'kode_jurnal'	=> $kode_jurnal,
+																			'kode_jurnal'	=> $kd_jurnal,
+																			'kode_penggajian'	=> $kd_penggajian,
 																			'debet'			=> $debet,
 																			'kode_akun'		=> $id_akun_kas,
 																			'kredit'		=> 0,
 																			'tgl'			=> date('Y-m-d'),
 																			'created_at'	=> date('Y-m-d H:i:s'),
+																			'keterangan'	=> 'CASH',
 																		);
 																	$data_jurnal['kredit'.$abs->id_karyawan] = array(
-																			'kode_jurnal'	=> $kode_jurnal,
+																			'kode_jurnal'	=> $kd_jurnal,
+																			'kode_penggajian'	=> $kd_penggajian,
 																			'debet'			=> 0,
 																			'kode_akun'		=> $id_akun_hutang_gaji,
 																			'kredit'		=> $kredit,
 																			'tgl'			=> date('Y-m-d'),
 																			'created_at'	=> date('Y-m-d H:i:s'),
+																			'keterangan'	=> 'CASH',
 																		);
 
 																}
