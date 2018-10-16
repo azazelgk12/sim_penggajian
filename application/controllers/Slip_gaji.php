@@ -108,12 +108,22 @@
 								}
 						}
 					
+
 					$this->fpdf->ln(10);
 					$this->fpdf->setY(40);
 					$this->fpdf->setX(10);
-					$this->fpdf->Cell(0, 5,'NIK', 0, 2,'L');
+					$this->fpdf->Cell(0, 5,'ID Gaji', 0, 2,'L');
 
 					$this->fpdf->setY(40);
+					$this->fpdf->setX(30);
+					$this->fpdf->Cell(0, 5,': '.$pg->kode_penggajian, 0, 2,'L');
+
+					$this->fpdf->ln(10);
+					$this->fpdf->setY(45);
+					$this->fpdf->setX(10);
+					$this->fpdf->Cell(0, 5,'NIK', 0, 2,'L');
+
+					$this->fpdf->setY(45);
 					$this->fpdf->setX(30);
 					$this->fpdf->Cell(0, 5,': '.$pg->nik, 0, 2,'L');
 
@@ -127,11 +137,11 @@
 					$this->fpdf->Cell(0, 5,': '.$pg->nama_jabatan, 0, 2,'L');
 
 					$this->fpdf->ln(10);
-					$this->fpdf->setY(45);
+					$this->fpdf->setY(50);
 					$this->fpdf->setX(10);
 					$this->fpdf->Cell(0, 5,'Nama', 0, 2,'L');
 
-					$this->fpdf->setY(45);
+					$this->fpdf->setY(50);
 					$this->fpdf->setX(30);
 					$this->fpdf->Cell(0, 5,': '.$pg->nama, 0, 2,'L');
 
@@ -144,7 +154,7 @@
 					$this->fpdf->setX(150);
 					$this->fpdf->Cell(0, 5,': '.$pg->nama_divisi, 0, 2,'L');
 
-					$this->fpdf->Rect(5,55,200,0.7,'F');
+					$this->fpdf->Rect(5,60,200,0.7,'F');
 
 					$this->fpdf->SetFillColor(255,255,255);
 					$this->fpdf->Rect(5,67,100,100,'');

@@ -75,16 +75,18 @@
 				$this->fpdf->Cell(15,$h,'NO',1,0,'C',true);
 				$this->fpdf->SetX($left +=10 ); $this->fpdf->Cell(40, $h, 'Tanggal', 1, 0, 'C',true);
 				$this->fpdf->SetX($left += 40); $this->fpdf->Cell(40, $h, 'Kode Jurnal', 1, 0, 'C',true);
-				$this->fpdf->SetX($left += 40); $this->fpdf->Cell(90, $h, 'Nama Akun', 1, 0, 'C',true);
-				$this->fpdf->SetX($left += 90); $this->fpdf->Cell(50, $h, 'Debet', 1, 0, 'C',true);
-				$this->fpdf->SetX($left += 50); $this->fpdf->Cell(50, $h, 'Kredit', 1, 0, 'C',true);
+				$this->fpdf->SetX($left += 40); $this->fpdf->Cell(40, $h, 'ID Penggajian', 1, 0, 'C',true);
+				$this->fpdf->SetX($left += 40); $this->fpdf->Cell(40, $h, 'Nama Akun', 1, 0, 'C',true);
+				$this->fpdf->SetX($left += 40); $this->fpdf->Cell(30, $h, 'Debet', 1, 0, 'C',true);
+				$this->fpdf->SetX($left += 30); $this->fpdf->Cell(30, $h, 'Kredit', 1, 0, 'C',true);
+				$this->fpdf->SetX($left += 30); $this->fpdf->Cell(50, $h, 'Keterangan', 1, 0, 'C',true);
 			
 				
 				$this->fpdf->Ln(8);
 
 				$this->fpdf->SetFont('Arial','',8);
-				$this->SetWidths(array(15,40,40,90,50,50));
-				$this->SetAligns(array('C','C','C','L','R','R'));
+				$this->SetWidths(array(15,40,40,40,40,30,30,50));
+				$this->SetAligns(array('C','C','C','L','L','R','R','C'));
 				$no = 1;
 				$this->fpdf->SetFillColor(124,200,123);
 
@@ -102,6 +104,7 @@
 					}
 			$kode 			= array();
 			$kd_jurnal2 	= array();
+			$kd_penggajian  = array();
 			$no 			= 1;
 			$gaji 			= 0;
 			$total_debet 	= 0;
@@ -114,6 +117,11 @@
 						{
 							array_push($kode, $baris->kode_jurnal);
 							
+						}
+
+					if(!in_array($baris->kode_penggajian,$kd_penggajian))
+						{
+							array_push($kd_penggajian,$baris->kode_penggajian);
 						}
 				}
 
@@ -151,6 +159,7 @@
 								{
 									array_push($kd_jurnal2, $dj->kode_jurnal);
 									$nomor = $no++;
+									$kode_penggajian = $dj->kode_penggajian;
 									$kode_jurnal = $dj->kode_jurnal;
 									$tanggal = date_format(date_create($dj->tgl),'d-m-Y');
 									
@@ -160,6 +169,7 @@
 									$nomor ='';
 									$kode_jurnal = '';
 									$tanggal ='';
+									$kode_penggajian = '';
 								}
 
 							$CI->fpdf->SetX(5);
@@ -167,9 +177,11 @@
 								$nomor,
 								$tanggal,
 								$kode_jurnal,
+								$kode_penggajian,
 								$nama_akun,
 								$debet,
 								$kredit,
+								$dj->keterangan,
 								
 
 							));
@@ -181,9 +193,10 @@
 			$this->fpdf->SetTextColor(0,0,0);
 			$left = $this->fpdf->GetX();
 			$this->fpdf->SetX(5);
-			$this->fpdf->Cell(185,$h,'Jumlah',1,0,'C',true);
-			$this->fpdf->SetX($left += 180); $this->fpdf->Cell(50, $h, 'Rp. '.number_format($total_debet,2,',','.'), 1, 0, 'R',true);
-			$this->fpdf->SetX($left += 50); $this->fpdf->Cell(50, $h,'Rp. '.number_format($total_kredit,2,',','.'), 1, 0, 'R',true);
+			$this->fpdf->Cell(175,$h,'Jumlah',1,0,'C',true);
+			$this->fpdf->SetX($left += 170); $this->fpdf->Cell(30, $h, 'Rp. '.number_format($total_debet,2,',','.'), 1, 0, 'R',true);
+			$this->fpdf->SetX($left += 30); $this->fpdf->Cell(30, $h,'Rp. '.number_format($total_kredit,2,',','.'), 1, 0, 'R',true);
+			$this->fpdf->SetX($left += 30); $this->fpdf->Cell(50, $h,'', 1, 0, 'R',true);
 
 				// $this->fpdf->SetFont('Arial','B',8);
 				// $this->fpdf->SetFillColor(52,126,236);
@@ -316,9 +329,11 @@
 					$this->fpdf->Cell(15,$h,'NO',1,0,'C',true);
 					$this->fpdf->SetX($left +=10 ); $this->fpdf->Cell(40, $h, 'Tanggal', 1, 0, 'C',true);
 					$this->fpdf->SetX($left += 40); $this->fpdf->Cell(40, $h, 'Kode Jurnal', 1, 0, 'C',true);
-					$this->fpdf->SetX($left += 40); $this->fpdf->Cell(90, $h, 'Nama Akun', 1, 0, 'C',true);
-					$this->fpdf->SetX($left += 90); $this->fpdf->Cell(50, $h, 'Debet', 1, 0, 'C',true);
-					$this->fpdf->SetX($left += 50); $this->fpdf->Cell(50, $h, 'Kredit', 1, 0, 'C',true);
+					$this->fpdf->SetX($left += 40); $this->fpdf->Cell(40, $h, 'ID Penggajian', 1, 0, 'C',true);
+					$this->fpdf->SetX($left += 40); $this->fpdf->Cell(40, $h, 'Nama Akun', 1, 0, 'C',true);
+					$this->fpdf->SetX($left += 40); $this->fpdf->Cell(30, $h, 'Debet', 1, 0, 'C',true);
+					$this->fpdf->SetX($left += 30); $this->fpdf->Cell(30, $h, 'Kredit', 1, 0, 'C',true);
+					$this->fpdf->SetX($left += 30); $this->fpdf->Cell(50, $h, 'Keterangan', 1, 0, 'C',true);
 				
 					
 					$this->fpdf->Ln(8);

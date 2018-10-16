@@ -133,6 +133,7 @@
 
 							$row[] = $no;
 							$row[] = $field->kode_jurnal;
+							$row[] = $field->kode_penggajian;
 							$row[] = date_format(date_create($field->tgl),'d-m-Y');
 							$row[] = '<button title="lihat detail" class="btn btn-sm btn-success" onclick="detail(\''.$index.'\')"><i class="fa fa-eye"></i></button><a href="'.site_url('jurnal/edit/'.$field->kode_jurnal).'" title="Edit" class="btn btn-sm btn-primary"><i class="fa fa-pencil"></i></a>
 								';
@@ -202,6 +203,7 @@
 							echo "<td class='text-center'>".$det->nama_akun."</td>";
 							echo "<td class='text-center'>".$det->debet."</td>";
 							echo "<td class='text-center'>".$det->kredit."</td>";
+							echo "<td class='text-center'>".$det->keterangan."</td>";
 							echo "</tr>";
 							$no++;
 						}

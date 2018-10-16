@@ -62,7 +62,7 @@
                 'data':'kode='+kodeJurnal,
                 success:function(detail){
 
-                  $("#row-"+index).after("<tr id='detail-"+index+"' class='detail-jurnal'><td colspan='4'><table class='table table-bordered table-striped'><thead><tr><th class='col-md-1 text-center bg-red'>No</th><th class='col-md-4 text-center bg-red'>Nama Akun</th><th class='col-md-2 bg-red text-center bg-red'>Debet</th><th class='col-md-2 text-center bg-red'>Kredit</th></tr></thead><tbody>"+detail+"</tbody></table></td></tr>");
+                  $("#row-"+index).after("<tr id='detail-"+index+"' class='detail-jurnal'><td colspan='5'><table class='table table-bordered table-striped'><thead><tr><th class='col-md-1 text-center bg-red'>No</th><th class='col-md-4 text-center bg-red'>Nama Akun</th><th class='col-md-2 bg-red text-center bg-red'>Debet</th><th class='col-md-2 text-center bg-red'>Kredit</th><th class='col-md-2 text-center bg-red'>Keterangan</th></tr></thead><tbody>"+detail+"</tbody></table></td></tr>");
 
                   $(".detail-jurnal").css('display','none');
                 }
@@ -71,10 +71,10 @@
            },
 
            'columnDefs':[{
-               'targets':[0,3],
+               'targets':[0,4],
                'orderable':false,
            },{
-               'targets':[0,2,3],
+               'targets':[0,2,3,4],
                'className':'text-center',
            }]
        });
@@ -263,7 +263,8 @@
                     <thead>
                       <tr class="bg-primary">
                         <th class="col-md-1 text-center">No</th>
-                        <th class="col-md-3 text-center">Kode Jurnal</th>
+                        <th class="col-md-2 text-center">Kode Jurnal</th>
+                        <th class="col-md-2 text-center">ID Penggajian</th>
                         <th class="col-md-3 text-center">Tanggal</th>
                         <th class="col-md-2 text-center">aksi</th>
                       </tr>
