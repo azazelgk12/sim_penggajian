@@ -1117,7 +1117,10 @@
 					$tgl_akhir			= @$CI->input->post('tgl_akhir');
 
 					# kode jurnal untuk input jurnal otomatis
-					$kode_jurnal	= 'JP'.date('YmdHis');
+					$kode_jurnal	= date('YmdHis');
+					$kode_penggajian = date('YmdHis');
+
+					$no_slip = 'SLPGJ'.date('YmdHis');
 
 					# data jurnal
 					$debet =0;
@@ -1198,6 +1201,13 @@
 									$data_gaji_kar = array();
 									foreach($tampil_absensi as $abs)
 										{
+											$kode_jurnal += 1;
+											$kd_jurnal = 'JP'.$kode_jurnal;
+
+											$kode_penggajian += 1;
+											$kd_penggajian = 'PGJ'.$kode_penggajian;
+											// $kode_jurnal = 'jp'.time();
+											// $kode_penggajian = 'pg'.time();
 											# data karyawan
 											$data_karyawan = $CI->M_pegawai->tampil_pegawai(array('id_karyawan' => $abs->id_karyawan));
 
@@ -1340,6 +1350,10 @@
 																							$potongan = 0;
 																						}
 																				}
+
+																			$data_gaji[$abs->id_karyawan]['no_slip_gaji'] = $no_slip;
+																			$data_gaji[$abs->id_karyawan]['kode_jurnal'] = $kd_jurnal;
+																			$data_gaji[$abs->id_karyawan]['kode_penggajian'] = $kd_penggajian;
 																			$data_gaji[$abs->id_karyawan]['tgl'] 			= date('Y-m-d');
 																			$data_gaji[$abs->id_karyawan]['tgl_awal'] 		= $tanggal_awal;
 																			$data_gaji[$abs->id_karyawan]['tgl_akhir'] 		= $tanggal_akhir;
@@ -1482,6 +1496,10 @@
 																									$potongan = 0;
 																								}
 																						}
+
+																					$data_gaji[$abs->id_karyawan]['no_slip_gaji'] = $no_slip;
+																					$data_gaji[$abs->id_karyawan]['kode_jurnal'] = $kd_jurnal;
+																					$data_gaji[$abs->id_karyawan]['kode_penggajian'] = $kd_penggajian;
 																					$data_gaji[$abs->id_karyawan]['tgl'] 				= date('Y-m-d');
 																					$data_gaji[$abs->id_karyawan]['tgl_awal'] 			= $tanggal_awal;
 																					$data_gaji[$abs->id_karyawan]['tgl_akhir'] 			= $tanggal_akhir;
@@ -1563,6 +1581,10 @@
 																				}
 																		}
 
+
+																	$data_gaji[$abs->id_karyawan]['no_slip_gaji'] = $no_slip;
+																	$data_gaji[$abs->id_karyawan]['kode_jurnal'] = $kd_jurnal;
+																	$data_gaji[$abs->id_karyawan]['kode_penggajian'] = $kd_penggajian;
 																	$gapok_karyawan = $gapok * $jumlah_absensi;
 																	$data_gaji[$abs->id_karyawan]['tgl'] 			= date('Y-m-d');
 																	$data_gaji[$abs->id_karyawan]['tgl_awal'] 		= $tanggal_awal;
