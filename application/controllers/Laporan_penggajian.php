@@ -69,19 +69,20 @@
 				$this->fpdf->Cell(15,$h,'NO',1,0,'C',true);
 				$this->fpdf->SetX($left +=10 ); $this->fpdf->Cell(40, $h, 'Tanggal', 1, 0, 'C',true);
 				$this->fpdf->SetX($left += 40); $this->fpdf->Cell(40, $h, 'NIK', 1, 0, 'C',true);
-				$this->fpdf->SetX($left += 40); $this->fpdf->Cell(60, $h, 'Nama', 1, 0, 'C',true);
-				$this->fpdf->SetX($left += 60); $this->fpdf->Cell(50, $h, 'Total Pendapatan', 1, 0, 'C',true);
+				$this->fpdf->SetX($left += 40); $this->fpdf->Cell(40, $h, 'Nama', 1, 0, 'C',true);
+				$this->fpdf->SetX($left += 40); $this->fpdf->Cell(40, $h, 'Total Pendapatan', 1, 0, 'C',true);
 			
 				
-				$this->fpdf->SetX($left += 50); $this->fpdf->Cell(40, $h, 'Potongan', 1, 0, 'C',true);
+				$this->fpdf->SetX($left += 40); $this->fpdf->Cell(40, $h, 'Potongan', 1, 0, 'C',true);
 				$this->fpdf->SetX($left += 40); $this->fpdf->Cell(40, $h, 'Gaji Bersih', 1, 0, 'C',true);
+				$this->fpdf->SetX($left += 40); $this->fpdf->Cell(30, $h, 'Pembayaran', 1, 0, 'C',true);
 			
 				
 				$this->fpdf->Ln(8);
 
 				$this->fpdf->SetFont('Arial','',8);
-				$this->SetWidths(array(15,40,40,60,50,40,40));
-				$this->SetAligns(array('C','C','L','L','R','R','R'));
+				$this->SetWidths(array(15,40,40,40,40,40,40,30));
+				$this->SetAligns(array('C','C','L','L','R','R','R','C'));
 				$no = 1;
 				$this->fpdf->SetFillColor(124,200,123);
 
@@ -113,15 +114,18 @@
 						'Rp. '.number_format($total_pendapatan,2,',','.'),
 						'Rp. '.number_format($baris->total_potongan,2,',','.'),
 						'Rp. '.number_format($gaji_bersih,2,',','.'),
+						$baris->jenis_pembayaran
 
 					));
 					$gaji += $gaji_bersih;
 				}
 
-				$this->fpdf->SetX(230);
+				$this->fpdf->SetX(210);
+				$this->fpdf->SetFont('Arial','B',8);
 				$this->fpdf->Cell(0,10,'TOTAL    :',0,0,'L');
-				$this->fpdf->Cell(0,10,'Rp. '.number_format($gaji,2,',','.'),0,0,'R');
-
+				$this->fpdf->SetX(235);
+				$this->fpdf->Cell(0,10,'Rp. '.number_format($gaji,2,',','.'),0,0,'L');
+				$this->fpdf->SetFont('Arial','',8);
 				$this->fpdf->Ln(15);
 				$this->fpdf->SetX(40);
 				$this->fpdf->Cell(0,10,'Dibuat oleh',0,0,'L');
@@ -236,12 +240,13 @@
 					$this->fpdf->Cell(15,$h,'NO',1,0,'C',true);
 					$this->fpdf->SetX($left +=10 ); $this->fpdf->Cell(40, $h, 'Tanggal', 1, 0, 'C',true);
 					$this->fpdf->SetX($left += 40); $this->fpdf->Cell(40, $h, 'NIK', 1, 0, 'C',true);
-					$this->fpdf->SetX($left += 40); $this->fpdf->Cell(60, $h, 'Nama', 1, 0, 'C',true);
-					$this->fpdf->SetX($left += 60); $this->fpdf->Cell(50, $h, 'Total Pendapatan', 1, 0, 'C',true);
+					$this->fpdf->SetX($left += 40); $this->fpdf->Cell(40, $h, 'Nama', 1, 0, 'C',true);
+					$this->fpdf->SetX($left += 40); $this->fpdf->Cell(40, $h, 'Total Pendapatan', 1, 0, 'C',true);
 				
 					
-					$this->fpdf->SetX($left += 50); $this->fpdf->Cell(40, $h, 'Potongan', 1, 0, 'C',true);
+					$this->fpdf->SetX($left += 40); $this->fpdf->Cell(40, $h, 'Potongan', 1, 0, 'C',true);
 					$this->fpdf->SetX($left += 40); $this->fpdf->Cell(40, $h, 'Gaji Bersih', 1, 0, 'C',true);
+					$this->fpdf->SetX($left += 30); $this->fpdf->Cell(40, $h, 'Pembayaran', 1, 0, 'C',true);
 				
 					
 					$this->fpdf->Ln(8);

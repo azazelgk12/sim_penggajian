@@ -64,7 +64,7 @@
 
 					$this->fpdf->setY(35);
 					$this->fpdf->setX(30);
-					$this->fpdf->Cell(0, 5,': '.$pg->kode_penggajian, 0, 2,'L');
+					$this->fpdf->Cell(0, 5,': '.$pg->no_slip_gaji, 0, 2,'L');
 
 					$this->fpdf->setY(35);
 					$CI->fpdf->setX(120);
