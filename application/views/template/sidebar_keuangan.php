@@ -85,7 +85,7 @@
 
                   <li><a><i class="fa fa-money"></i> Jurnal <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="<?= site_url('jurnal/tambah_jurnal');?>"><i class="fa fa-plus-square"></i> Tambah Jurnal</a></li>
+                      <!-- <li><a href="<?= site_url('jurnal/tambah_jurnal');?>"><i class="fa fa-plus-square"></i> Tambah Jurnal</a></li> -->
                       <li><a href="<?= site_url('jurnal');?>"><i class="fa fa-list"></i> lihat Jurnal</a></li>
                       
                     </ul>
